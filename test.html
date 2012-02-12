@@ -8,13 +8,55 @@
     var c = $("#cnv")[0];
     var context = c.getContext("2d");
 
-    Hydroxide.start(context);
+    var GameObj = {
+      x: 90,
+      y: 180,
+      width: 50,
+      height: 50,
+
+      xspeed: 1,
+      yspeed: 1,
+
+      draw: function(context) {
+        context.fillRect(this.x, this.y, this.width, this.height);
+      },
+
+      update: function() {
+        this.x += this.xspeed;
+        this.y += this.yspeed;
+      },
+
+      type: "circle",
+
+      onEdgeX: function() {
+        this.xspeed = -this.xspeed;
+      },
+
+      onEdgeY: function () {
+        this.yspeed = -this.yspeed;
+      }
+    };
+
+    go1 = GameObj;
+    go1.x = 13;
+    go1.y = 90;
+
+    go2 = GameObj;
+    go1.x = 350;
+    go1.y = 400;
+
+    go3 = GameObj;
+
+    Hydroxide.registerObject(go1);
+    Hydroxide.registerObject(go2);
+    Hydroxide.registerObject(go3);
+    Hydroxide.start(cnv, context, 10, 10, 600, 600);
   }
 
   $(document).ready(init);
   </script>
 
   <body>
-    <canvas id="cnv">Canvas not supported. Go get a new browser.</canvas>
+    <canvas id="cnv" width="600" height="600">Canvas not supported. Go get a new browser.</canvas>
   </body>
 </html>
