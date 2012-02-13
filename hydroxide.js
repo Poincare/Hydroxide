@@ -21,7 +21,12 @@ var Hydroxide = (function() {
  */
  
   var GameObjects = [];
-  
+ 
+/*
+ * An integer, read by all functions
+ */
+  var state;
+ 
   /*
  * id: id of the canvas tag
  * ct: canvas context
@@ -81,8 +86,8 @@ var Hydroxide = (function() {
         }
 
         else {
-          if(checkOverlap(selectedObject, GameObjects[j])) {
-            selectedObject.onCollision(GameObjects[j]);             
+          if(checkOverlap(selectedObject, GameObjects[i])) {
+            selectedObject.onCollision(GameObjects[i]);             
           }
         }
       }
@@ -132,6 +137,20 @@ var Hydroxide = (function() {
     GameObjects.push(GameObject);
   };
 
+  /*
+ * Set state, as an integer
+ */
+  var setState = function(s) {
+    state = s;
+  }
+
+  /*
+ * Get state, as an integer
+ */
+  var getState = function() {
+    return state;
+  }
+
   var exposed = {
     start: start,
     drawFrame: drawFrame,
@@ -139,7 +158,13 @@ var Hydroxide = (function() {
     registerObject: registerObject,
     checkCollision: checkCollision,
 
-    mouseClick: mouseClick  
+    inRect: inRect,
+    valueInRange: valueInRange,
+
+    setState: setState,
+    getState: getState,
+
+    mouseClick: mouseClick
   };
 
   return exposed;
@@ -150,12 +175,17 @@ var Hydroxide = (function() {
 var OHGameObj = (function() {
     var x = 0;
     var y = 0;
+
     var width = 0;
     var height = 0;
+
     var draw = function (context) {};
     var update = function () {};
+
     var onCollision = function () {};
+
     var screenClicked = function () {};
+
     var onEdgeX = function () {};
     var onEdgeY = function () {};
 
@@ -169,7 +199,6 @@ var OHGameObj = (function() {
       onCollision: onCollision,
       screenClicked: screenClicked
     }
-  };
-  return OHGameObj;
+  return exposed;
 
 })();
