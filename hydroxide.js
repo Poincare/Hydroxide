@@ -119,9 +119,11 @@ var Hydroxide = (function() {
 
   /* do not use externally unless a forced draw frame is needed */
   var drawFrame = function() {
+    //clear context
+    clearContext();
+
     //loop over all the GameObjects
     for(var i = 0; i < GameObjects.length; i++) {
-      clearContext();
 
       GameObjects[i].update();
       GameObjects[i].draw(context);
@@ -164,7 +166,9 @@ var Hydroxide = (function() {
     setState: setState,
     getState: getState,
 
-    mouseClick: mouseClick
+    mouseClick: mouseClick,
+
+    clearContext: clearContext
   };
 
   return exposed;
