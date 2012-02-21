@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <script src="../hydroxide.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  
+  <script>
+  /* create the class we're dealing with, others can inherit from it! */
+  function createClass() {
+    /* inherit from the main OHGameObj class, provided by Hydroxide */
+    var GameObj = Object.create(OHGameObj);
+
+    GameObj.xspeed = 1;
+    GameObj.yspeed = 1;
+    GameObj.x = 90;
+    GameObj.y = 150;
+    GameObj.width = 30;
+    GameObj.height = 30;
+    GameObj.context = null;
+
+    GameObj.fillStyle = null;
+   
+    GameObj.draw = function(context) {
+        //copy context into yerself
+        this.context = context;
+
+        //set fillStyle
+        context.fillStyle = this.fillStyle;        
+
+        context.fillRect(this.x, this.y, this.width, this.height);
+      };
+    GameObj.update = function() {
+      this.x += this.xspeed;
+      this.y += this.yspeed;
+    };
+
+    //change color of the rectangles
+    GameObj.screenClicked = function(posX, posY, inMe) {
+      if(inMe) {
+        if(Hydroxide.getState() == "black") {
+          Hydroxide.setState("gray");
+          this.fillStyle = "#EDF500";
+        }
+        else {
+          Hydroxide.setState("black");
+          this.fillStyle = "#000000";
+        }
+      }
+    }
+    GameObj.type = "circle";
+    GameObj.onEdgeX = function() {
+        this.xspeed = -this.xspeed;
+      };
+    GameObj.onEdgeY = function () {
+        this.yspeed = -this.yspeed;
+      };
+
+    return GameObj;
+  }
+
+  function init() {
+    var c = $("#cnv")[0];
+    var context = c.getContext("2d");
+
+    var GameObj = createClass();
+    var go1 = Object.create(GameObj);
+    go1.xspeed = -1;
+
+    //hook in clicking
+    $("#cnv").click(Hydroxide.mouseClick);
+
+    //initial state
+    Hydroxide.setState("black");
+
+    go1.screenClicked = function() {}; //we don't want it to reset state
+    Hydroxide.registerObject(go1);
+
+    Hydroxide.registerObject(GameObj);
+    Hydroxide.start("cnv", context, 20, 20, 600, 600);
+  }
+
+  $(document).ready(init);
+  </script>
+
+  <body>
+    <canvas id="cnv" width="600" height="600">Canvas not supported. Go get a new browser.</canvas>
+  </body>
+</html>

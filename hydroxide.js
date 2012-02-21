@@ -6,6 +6,7 @@ var Hydroxide = (function() {
   var canvas_width;
 
   var canvas_id;
+
   /* These are objects that are being used in the game */
   /* Must contain specific public properties:
  * x - x coordinate of object (used for collision detection), bottom left corner
@@ -56,14 +57,25 @@ var Hydroxide = (function() {
   };
 
   /* this needs to be connected to a mouse click on the canvas by the user of OH */
-  var mouseClick = function (event) {
-    var canvas_selector = "#" + canvas_id;
+  var mouseClick = function (e) {
+    var x;
+    var y;
+    if (e.pageX || e.pageY) { 
+      x = e.pageX;
+      y = e.pageY;
+    }
+    else { 
+      x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+      y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+    } 
 
-    var posX = $(canvas_selector).position().left, posY = $(canvas_selector).position().top;
+    var gCanvasElement = $("#"+canvas_id)[0];
+    x -= gCanvasElement.offsetLeft;
+    y -= gCanvasElement.offsetTop;
 
     for(var i = 0; i<GameObjects.length; i++) {
-      GameObjects[i].screenClicked(inRect(posX, posY, GameObjects[i]));
-    }  
+      GameObjects[i].screenClicked(x, y, inRect(x, y, GameObjects[i])); 
+    }
   };
 
   var valueInRange = function(value, min, max) {
@@ -124,9 +136,10 @@ var Hydroxide = (function() {
 
     //loop over all the GameObjects
     for(var i = 0; i < GameObjects.length; i++) {
-
+      context.save();
       GameObjects[i].update();
       GameObjects[i].draw(context);
+      context.restore();
     } 
   };
 
