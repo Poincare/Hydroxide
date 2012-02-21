@@ -34,7 +34,6 @@ $(document).ready(init)
 ```
 
 This is pretty standard code.
-
 Now, for Hydroxide to start, you need a couple of things handled first.
 
 ```javascript
@@ -83,4 +82,6 @@ function init() {
 $(document).ready(init);
 ```
 
+Calling Hydroxide.start() starts the Hydroxide engine, which calls events in registered objects. 
+What does that mean? Go to docs/gameobjects.md to learn more.
 

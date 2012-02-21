@@ -1,5 +1,9 @@
 #Hi there!
 
+Hydroxide is an HTML5 Canvas game engine.
+
+It keeps track of collisions, edges, mouse clicks, keyboards and state and fires events.
+
 Hydroxide is a ton of fun to code in, since there isn't really that much you have to learn!
 
 Check out the docs in this directory, and be sure to check out the examples/ too.
