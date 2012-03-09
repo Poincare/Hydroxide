@@ -47,6 +47,7 @@ var Hydroxide = (function() {
 
   };
 
+  /* check if a point with coordinates x and y is in rectangle A */
   var inRect = function(x, y, A) {
     if(A.x <= x && A.y <= y && y <= (A.y + A.height) && x <= (A.x + A.width)) {
       return true;
@@ -78,10 +79,12 @@ var Hydroxide = (function() {
     }
   };
 
+  /* check if "value" is in the range from min to max, inclusive */
   var valueInRange = function(value, min, max) {
     return (value >= min) && (value <= max);
   };
 
+  /* check if two rectangles overlap, aka collide */
   var checkOverlap = function(A, B) {
     var xOverlap = valueInRange(A.x, B.x, B.x+B.width) || valueInRange(B.x, A.x, A.x+A.width);
 
@@ -91,6 +94,7 @@ var Hydroxide = (function() {
 
   };
 
+  /* check collision between all GameObjects */
   var checkCollision = function(selectedObject) {
       for(var i = 0; i<GameObjects.length; i++) {
         if(selectedObject == GameObjects[i]) {
@@ -105,6 +109,7 @@ var Hydroxide = (function() {
       }
   };
 
+  /* check if object has hit an edge */
   var checkEdge = function(go) {
     if(go.y <= 0 || go.y+go.height >= canvas_height) {
       go.onEdgeY();
@@ -115,6 +120,7 @@ var Hydroxide = (function() {
     }
   }
 
+  /* engine checking; checks bounds, collisions, clicks, etc. */
   var engineCheck = function() {
     //check for collision
     for(var i = 0; i<GameObjects.length; i++) {
@@ -125,11 +131,12 @@ var Hydroxide = (function() {
     }
   };
 
+  /* clear screen out */
   var clearContext = function() {
     context.clearRect(0, 0, canvas_width, canvas_height);
   };
 
-  /* do not use externally unless a forced draw frame is needed */
+  /* do not use externally unless a forced draw frame (which shouldn't happen) is needed */
   var drawFrame = function() {
     //clear context
     clearContext();
@@ -166,6 +173,7 @@ var Hydroxide = (function() {
     return state;
   }
 
+  /* exposed functions that external code can use */
   var exposed = {
     start: start,
     drawFrame: drawFrame,
@@ -188,7 +196,11 @@ var Hydroxide = (function() {
 })();
 
 
-/* Use as prototype for new GameObjects */
+/* Use as prototype for new GameObjects
+* Use Object.create which is now part of most browsers,
+* including IE
+*/
+
 var OHGameObj = (function() {
     var x = 0;
     var y = 0;
@@ -219,3 +231,4 @@ var OHGameObj = (function() {
   return exposed;
 
 })();
+
