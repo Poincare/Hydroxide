@@ -207,6 +207,23 @@ var Hydroxide = (function() {
 })();
 
 
+/* Hydroxide thread object
+* All threads should derive from this object
+* use Object.create
+* currently unused
+*/
+var OHThread = (function() {
+	//called when thread is started
+	var main = function() {};
+
+	//called when thread is killed
+	var killed = function() {};
+
+	//called when thread is paused
+	var paused = function () {}
+});
+
+
 /* Use as prototype for new GameObjects
 * Use Object.create which is now part of most browsers,
 * including IE
