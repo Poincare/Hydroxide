@@ -32,3 +32,5 @@ Check out the rect_inme.html and rect_click.html examples to learn more.
 
 Keyboard input is coming soon!
 
+Head on over to framenum.md to learn about an important Hydroxide property.
+
