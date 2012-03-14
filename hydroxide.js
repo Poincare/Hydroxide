@@ -1,4 +1,7 @@
 var Hydroxide = (function() {
+	//number of frames completed; use for animations
+	var frameNum = 0;
+
   /* canvas context */
   var context;
 
@@ -148,6 +151,8 @@ var Hydroxide = (function() {
       GameObjects[i].draw(context);
       context.restore();
     } 
+
+		frameNum++;
   };
 
   /*
@@ -173,6 +178,10 @@ var Hydroxide = (function() {
     return state;
   }
 
+	var getFrameNum = function() {
+		return frameNum;
+	}
+
   /* exposed functions that external code can use */
   var exposed = {
     start: start,
@@ -189,7 +198,9 @@ var Hydroxide = (function() {
 
     mouseClick: mouseClick,
 
-    clearContext: clearContext
+    clearContext: clearContext,
+	
+		getFrameNum: getFrameNum
   };
 
   return exposed;
