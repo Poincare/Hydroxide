@@ -214,6 +214,8 @@ var Hydroxide = (function() {
 		for(var i = 0; i<runningThreads.length; i++) {
 			var rt = runningThreads[i];
 			if(rt.id == id) {
+				rt.killed();
+
 				//remove running thread
 				clearInterval(id);
 				runningThreads.splice(i, 1);
