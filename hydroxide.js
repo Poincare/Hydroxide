@@ -255,7 +255,7 @@ var Hydroxide = (function() {
 /* Hydroxide thread object
 * All threads should derive from this object
 * use Object.create
-* currently unused
+* paused() is currently unused
 */
 var OHThread = (function() {
 	//called when thread is started
