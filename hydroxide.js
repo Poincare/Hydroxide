@@ -30,7 +30,18 @@ var Hydroxide = (function() {
  * An integer, read by all functions
  */
   var state;
- 
+
+/*
+* Threading system structure; holds all running thread objects
+*/
+	var runningThreads = [];
+
+/*
+* Amount of time between thread calls in milliseconds
+*/ 
+
+	var threadTime = 15;
+
   /*
  * id: id of the canvas tag
  * ct: canvas context
@@ -169,18 +180,50 @@ var Hydroxide = (function() {
  */
   var setState = function(s) {
     state = s;
-  }
+  };
 
   /*
  * Get state, as an integer
  */
   var getState = function() {
     return state;
-  }
+  };
 
 	var getFrameNum = function() {
 		return frameNum;
-	}
+	};
+
+	/*
+	* "threading" subsystem
+	* thrTime: amount of time between each thread function call, default 15
+	*/
+	var initThreading = function(thrTime) {
+		threadTime = thrTime;	
+	};
+
+	var addThread = function(threadObj) {
+		id = setInterval(threadObj.main, threadTime);
+
+		threadObj.id = id;
+		runningThreads.push(threadObj);
+
+		return id;
+	};
+
+	var removeThread = function(id) {
+		for(var i = 0; i<runningThreads.length; i++) {
+			var rt = runningThreads[i];
+			if(rt.id == id) {
+				//remove running thread
+				clearInterval(id);
+				runningThreads.splice(i, 1);
+			}
+		}
+	};
+
+	var getRunningThreads = function() {
+		return runningThreads;
+	};
 
   /* exposed functions that external code can use */
   var exposed = {
@@ -221,6 +264,14 @@ var OHThread = (function() {
 
 	//called when thread is paused
 	var paused = function () {}
+
+	var exposed = {
+		main: main,
+		killed: killed,
+		paused: paused
+	};
+
+	return exposed;
 });
 
 
