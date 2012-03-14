@@ -20,3 +20,5 @@ Note that Hydroxide leaves you free to set the state as a string, an object, an 
 This is because Javascript does not have a standard way of defining enums, which are typically used in state machines.
 
 However, you are encouraged to stick to a pattern since this will make your live easier in the long run.
+
+Check out threading.md to get a taste of how "threading" is emulated in Javascript within Hydroxide.
