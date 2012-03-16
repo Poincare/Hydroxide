@@ -106,6 +106,24 @@ var Hydroxide = (function() {
 		return dist; 
  	}
 
+	/* returns midpoint coordinates as array of (x1, y1) - (x2, y2) */
+	var midpoint = function(x1, y1, x2, y2) {
+		var res = [Math.abs((x1-x2)/2), Math.abs((y1-y2)/2)]
+			
+		return res
+	}
+
+	/* returns hyptoteneuse length of a right triangle with bases a and b */
+	var rightTriangleBB = function(a, b) {
+		return Math.sqrt(a*a + b*b);
+	}
+
+	/* returns base length of a right triangle with base a and hypoteneuse c */
+	var rightTriangleBH = function(a, c) {
+		return Math.sqrt(c*c - a*a);
+	}
+
+
   /* check if two rectangles overlap, aka collide */
   var checkOverlap = function(A, B) {
     var xOverlap = valueInRange(A.x, B.x, B.x+B.width) || valueInRange(B.x, A.x, A.x+A.width);
