@@ -8,6 +8,7 @@ var Hydroxide = (function() {
   var canvas_height;
   var canvas_width;
 
+	//canvas ID on DOM
   var canvas_id;
 
   /* These are objects that are being used in the game */
@@ -189,6 +190,9 @@ var Hydroxide = (function() {
     return state;
   };
 
+	/*
+	* Get number of frames elapsed
+	*/
 	var getFrameNum = function() {
 		return frameNum;
 	};
@@ -201,6 +205,9 @@ var Hydroxide = (function() {
 		threadTime = thrTime;	
 	};
 
+	/*
+	* Add thread, or, basically start interval
+	*/
 	var addThread = function(threadObj) {
 		id = setInterval(threadObj.main, threadTime);
 
@@ -210,6 +217,10 @@ var Hydroxide = (function() {
 		return id;
 	};
 
+	/*
+	* Remove thread from running
+	* calls killed() in thread object
+	*/
 	var removeThread = function(id) {
 		for(var i = 0; i<runningThreads.length; i++) {
 			var rt = runningThreads[i];
@@ -223,6 +234,9 @@ var Hydroxide = (function() {
 		}
 	};
 
+	/*
+	* Get array of running threads
+	*/
 	var getRunningThreads = function() {
 		return runningThreads;
 	};
@@ -245,7 +259,13 @@ var Hydroxide = (function() {
 
     clearContext: clearContext,
 	
-		getFrameNum: getFrameNum
+		getFrameNum: getFrameNum,
+
+		initThreading: initThreading,
+		addThread: addThread,
+		removeThread: removeThread,
+		getRunningThreads: getRunningThreads
+
   };
 
   return exposed;
