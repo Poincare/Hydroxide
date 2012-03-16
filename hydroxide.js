@@ -99,6 +99,13 @@ var Hydroxide = (function() {
     return (value >= min) && (value <= max);
   };
 
+	/* returns distance between (x1, y1) and (x2, y2) */
+	var distance = function(x1, y1, x2, y2) {
+		var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+		
+		return dist; 
+ 	}
+
   /* check if two rectangles overlap, aka collide */
   var checkOverlap = function(A, B) {
     var xOverlap = valueInRange(A.x, B.x, B.x+B.width) || valueInRange(B.x, A.x, A.x+A.width);
@@ -251,6 +258,7 @@ var Hydroxide = (function() {
 
     inRect: inRect,
     valueInRange: valueInRange,
+		distance: distance,
 
     setState: setState,
     getState: getState,
@@ -269,6 +277,7 @@ var Hydroxide = (function() {
   };
 
   return exposed;
+
 })();
 
 
@@ -294,6 +303,7 @@ var OHThread = (function() {
 	};
 
 	return exposed;
+
 });
 
 
