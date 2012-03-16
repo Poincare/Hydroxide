@@ -8,7 +8,7 @@ The source code is extremely well documented and easy to understand.
 
 Check out examples/ and docs/ to learn more.
 
-*jQuery is a dependency!*
+**jQuery is a dependency!**
 
 ##Features
 
