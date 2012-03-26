@@ -1,3 +1,7 @@
+/*
+* HTML% 2D canvas game engine
+*/
+
 var Hydroxide = (function() {
 	//number of frames completed; use for animations
 	var frameNum = 0;
