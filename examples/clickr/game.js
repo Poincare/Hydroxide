@@ -1,3 +1,4 @@
+//small clicking and object generation example
 function createClass() {
   /* inherit from the main OHGameObj class, provided by Hydroxide */
   var GameObj = Object.create(OHGameObj);
