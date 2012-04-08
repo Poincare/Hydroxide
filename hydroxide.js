@@ -30,6 +30,10 @@ var Hydroxide = (function() {
  */
  
   var GameObjects = [];
+
+	/* These are generic objects onto which the game can tack on some data */
+	/* They can be literally anything, and, each structure has a name associated with it, so that it may be found again */	
+	var DataObjects = {};
  
 /*
  * An integer, read by all functions
@@ -108,7 +112,7 @@ var Hydroxide = (function() {
 		var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 		
 		return dist; 
- 	}
+	}
 
 	/* returns midpoint coordinates as array of (x1, y1) - (x2, y2) */
 	var midpoint = function(x1, y1, x2, y2) {
@@ -270,6 +274,36 @@ var Hydroxide = (function() {
 		return runningThreads;
 	};
 
+	/* Code section for DataObjects */
+	
+	/* Do not use DataObject to register game objects, because the name system is meant for programmers, not computers! */
+	var registerDataObject = function(name, obj) {
+		if(name in DataObjects) {
+			return -1;
+		}
+
+		DataObjects[name] = obj;
+		return 0;
+	};
+
+
+	var getDataObject = function(name) {
+		if(name in DataObjects) {
+			return DataObjects[name];
+		}
+	
+		else {
+			return -1;
+		}
+
+	};
+
+
+	/* essentially the same as registerDataObject */
+	var updateDataObject = function(name, obj) {
+		return registerDataObject(name, obj);
+	}
+
   /* exposed functions that external code can use */
   var exposed = {
     start: start,
@@ -294,8 +328,11 @@ var Hydroxide = (function() {
 		initThreading: initThreading,
 		addThread: addThread,
 		removeThread: removeThread,
-		getRunningThreads: getRunningThreads
+		getRunningThreads: getRunningThreads,
 
+		registerDataObject: registerDataObject,
+		getDataObject: getDataObject,
+		updateDataObject: updateDataObject
   };
 
   return exposed;
