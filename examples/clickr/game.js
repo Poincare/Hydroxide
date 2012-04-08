@@ -26,7 +26,7 @@ function createClass() {
 
  		context.beginPath();
 		context.arc(this.centerx, this.centery, 15, 0, 2 * Math.PI, false);
-		context.fillStyle = "#ffffff";
+		context.fillStyle = "#8ED6FF";
 		context.fill();
 		context.closePath(); 
 		//context.fillRect(this.x, this.y, this.width, this.height);
@@ -70,22 +70,6 @@ function createClass() {
   return GameObj;
 }
 
-function createBack() {
-	var b = Object.create(OHGameObj);
-
-	b.x = 0;
-	b.y = 0;
-	b.width = $("#cnv").attr("width");
-	b.height = $("#cnv").attr("height");
-
-	b.draw = function() {
-		context.fillStyle = "#666";
-		context.fillRect(b.x, b.y, b.width, b.width);
-	}
-
-	return b;
-}
-
 function addObject() {
 	var GameObj = createClass();
 	var g = Object.create(GameObj);
@@ -102,8 +86,7 @@ function init() {
   var context = c.getContext("2d");
 
   var GameObj = createClass();
-	var background = createBack();
- 
+  
 	$("#cnv").click(Hydroxide.mouseClick);
 
 	setInterval("addObject()", 600);
@@ -111,7 +94,6 @@ function init() {
 	var gameStats = {"points":0}
 
 	Hydroxide.registerObject(GameObj);
-	Hydroxide.registerObject(background);
 	Hydroxide.registerDataObject("gameStats", gameStats);
 
   Hydroxide.start("cnv", context, 20, 20, 600, 600);
