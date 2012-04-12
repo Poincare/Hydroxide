@@ -18,3 +18,9 @@ Check out examples/ and docs/ to learn more.
 * State machine - read and write states of the engine
 * Keyboard and Mouse input - calls functions in your objects
 * Simple - Stays out of your way, but, abstracts away some things
+
+##TODO
+
+Fix the identation! Its off in so many files! This will also get you accuainted with the source code :)
+
+Send pull requests!
