@@ -19,14 +19,31 @@ function createClass() {
 
 	GameObj.toDraw = true;
 
+	GameObj.color = "#ffffff";
+	GameObj.white = "#ffffff";
+	GameObj.orange = "#FF8708";
+
   GameObj.draw = function(context) {
 		if(!this.toDraw) {
 			return;
 		}
 
+		if(this.centery > 7*$("#cnv").width()/12) {
+			this.color = this.orange;
+		}
+
  		context.beginPath();
 		context.arc(this.centerx, this.centery, 15, 0, 2 * Math.PI, false);
-		context.fillStyle = "#8ED6FF";
+		context.fillStyle = this.color; 
+		context.shadowColor = this.color;
+
+		if(this.color == this.orange) {
+			context.shadowBlur = 10+(this.centery % 10);
+		}
+		else {
+			context.shadowBlur = 10;
+		}
+		
 		context.fill();
 		context.closePath(); 
 		//context.fillRect(this.x, this.y, this.width, this.height);
@@ -37,7 +54,7 @@ function createClass() {
 	GameObj.centerToCoor = function() {
 		this.x = this.centerx - this.radius;
 		this.y = this.centery - this.radius;
-	}
+	};
 
   GameObj.update = function() {
     this.centery += this.yspeed;
@@ -46,7 +63,14 @@ function createClass() {
   
 	GameObj.type = "circle";
 
-  GameObj.onEdgeY = function () {
+  GameObj.onEdgeY = function () {a
+		obj = Hydroxide.getDataObject("gameStats");
+		obj["lives"]--;
+
+		if(obj["lives"] < 0) {
+
+		}
+
   	this.toDraw = false;   
   };
 
@@ -70,11 +94,12 @@ function createClass() {
   return GameObj;
 }
 
+
 function addObject() {
 	var GameObj = createClass();
 	var g = Object.create(GameObj);
 
-	g.centerx = Math.floor(Math.random() * parseInt($("#cnv").attr("width")));
+	g.centerx = Math.floor(Math.random() * $("#cnv").width());
 	g.centery = g.radius;
 
 	g.yspeed = Math.random() * 2;	
@@ -91,12 +116,12 @@ function init() {
 
 	setInterval("addObject()", 600);
 
-	var gameStats = {"points":0}
+	var gameStats = {"points":0, "lives":5}
 
 	Hydroxide.registerObject(GameObj);
 	Hydroxide.registerDataObject("gameStats", gameStats);
 
-  Hydroxide.start("cnv", context, 20, 20, 600, 600);
+  Hydroxide.start("cnv", context, 20, 20, $("#cnv").width(), $("#cnv").height());
 }
 
 $(document).ready(init);
