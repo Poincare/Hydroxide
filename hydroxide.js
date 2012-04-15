@@ -372,33 +372,58 @@ var OHThread = (function() {
 */
 
 var OHGameObj = (function() {
-    var x = 0;
-    var y = 0;
+  var x = 0;
+  var y = 0;
 
-    var width = 0;
-    var height = 0;
+  var width = 0;
+  var height = 0;
 
-    var draw = function (context) {};
-    var update = function () {};
+  var draw = function (context) {};
+  var update = function () {};
 
-    var onCollision = function () {};
+  var onCollision = function () {};
 
-    var screenClicked = function () {};
+  var screenClicked = function () {};
 
-    var onEdgeX = function () {};
-    var onEdgeY = function () {};
+  var onEdgeX = function () {};
+  var onEdgeY = function () {};
 
-    var exposed = {
-      x:x,
-      y:y,
-      width: width,
-      height: height,
-      draw: draw,
-      update: update,
-      onCollision: onCollision,
-      screenClicked: screenClicked
-    }
+  var exposed = {
+    x:x,
+    y:y,
+    width: width,
+    height: height,
+    draw: draw,
+    update: update,
+    onCollision: onCollision,
+    screenClicked: screenClicked
+  };
+
   return exposed;
 
 })();
+
+/* Specific purpose objects derived from OHGameObj - make your life easier */
+
+/* for low-level animation; set number of frames, calls a function on draw with a frame number */
+var OHBasicAnimatedObj = (function() {	
+	var obj = Object.create(OHGameObj);
+
+	obj.frames = 1;
+ 
+	obj.setFrames = function(f) {
+		this.frames = f;
+	};
+
+	//override!
+	obj.drawFrame = function(frameNum) {};
+
+	obj.draw = function(f) {
+		for(var i = 0; i<this.frames; i++) {
+			obj.drawFrame(i);
+		}
+	};
+
+})();
+
 
