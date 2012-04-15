@@ -424,6 +424,26 @@ var OHBasicAnimatedObj = (function() {
 		}
 	};
 
+	return obj;
+
+})();
+
+/* an edge bouncing object; used a lot, so, why not abstract it? */
+var OHWallBouncingObj = (function() {
+	var obj = Object.create(OHGameObj);
+	
+	obj.xspeed = 1;
+	obj.yspeed = 1;
+
+	obj.onEdgeX = function() {
+		obj.xspeed = -obj.xspeed;
+	};
+
+	obj.onEdgeY = function() {
+		obj.yspeed = -obj.yspeed;
+	};
+
+	return obj;
 })();
 
 

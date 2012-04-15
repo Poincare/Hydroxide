@@ -63,7 +63,7 @@ function createClass() {
   
 	GameObj.type = "circle";
 
-  GameObj.onEdgeY = function () {a
+  GameObj.onEdgeY = function () {
 		obj = Hydroxide.getDataObject("gameStats");
 		obj["lives"]--;
 
