@@ -458,6 +458,43 @@ var OHDrawSwitchObj = (function() {
 			return;
 		}
 
-			obj.drawSwitchOn();
+		obj.drawSwitchOn();
 	};
+
+	return obj;
+})();
+
+/* adds a update switch; if you don't want to update the object anymore, just set this.update to false */
+var OHUpdateSwitchObj = (function() {
+	var obj = Object.create(OHStatic);
+	
+	obj.updateSwitch = true;
+	
+	obj.update = function() {
+		if(obj.updateSwitch) {
+			return;
+		}
+
+		obj.updateSwitchOn();
+	};
+		
+	return obj;
+}();
+
+var OHMovingImageObj = (function() {
+	var obj.Object.create(OHStatic);
+	
+	obj.image = "";
+	
+	obj.imageObj = null;
+
+	obj.setImage = function(im) {
+		this.imageObj = new Image();
+	};
+
+	obj.draw = function() {
+		context.drawImage(this.imageObj, this.x, this.y);	
+	};
+
+	return obj;
 })();
