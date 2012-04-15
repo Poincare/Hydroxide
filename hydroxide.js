@@ -447,3 +447,17 @@ var OHWallBouncingObj = (function() {
 })();
 
 
+/* adds a draw swtich; if you don't want to draw the object anymore, just set this.draw to false */
+var OHDrawSwitchObj = (function() {
+	var obj = Object.create(OHDrawSwitchObj);
+	
+	obj.drawSwitch = true;
+
+	obj.draw = function() {
+		if(obj.drawSwitch) {
+			return;
+		}
+
+			obj.drawSwitchOn();
+	};
+})();
