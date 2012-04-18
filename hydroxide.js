@@ -449,7 +449,7 @@ var OHWallBouncingObj = (function() {
 
 /* adds a draw swtich; if you don't want to draw the object anymore, just set this.draw to false */
 var OHDrawSwitchObj = (function() {
-	var obj = Object.create(OHDrawSwitchObj);
+	var obj = Object.create(OHGameObj);
 	
 	obj.drawSwitch = true;
 
@@ -466,7 +466,7 @@ var OHDrawSwitchObj = (function() {
 
 /* adds a update switch; if you don't want to update the object anymore, just set this.update to false */
 var OHUpdateSwitchObj = (function() {
-	var obj = Object.create(OHStatic);
+	var obj = Object.create(OHGameObj);
 	
 	obj.updateSwitch = true;
 	
@@ -482,7 +482,7 @@ var OHUpdateSwitchObj = (function() {
 }();
 
 var OHMovingImageObj = (function() {
-	var obj.Object.create(OHStatic);
+	var obj = Object.create(OHGameObj);
 	
 	obj.image = "";
 	
@@ -498,3 +498,7 @@ var OHMovingImageObj = (function() {
 
 	return obj;
 })();
+
+var OHSquareObj = (function() {
+	var obj = Object.create(OHSt
+)();
