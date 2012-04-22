@@ -404,7 +404,7 @@ var OHGameObj = (function() {
 })();
 
 /* Specific purpose objects derived from OHGameObj - make your life easier */
-
+/* You don't have to use these; in fact, it may be beneficial to not use them, but, using them makes development quicker */
 /* for low-level animation; set number of frames, calls a function on draw with a frame number */
 var OHBasicAnimatedObj = (function() {	
 	var obj = Object.create(OHGameObj);
