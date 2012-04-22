@@ -1,5 +1,5 @@
 /*
-* HTML% 2D canvas game engine
+* HTML5 2D canvas game engine
 */
 
 var Hydroxide = (function() {
@@ -29,27 +29,27 @@ var Hydroxide = (function() {
  * true or false depending on if the object was clicked 
  */
  
-  var GameObjects = [];
+var GameObjects = [];
 
 	/* These are generic objects onto which the game can tack on some data */
 	/* They can be literally anything, and, each structure has a name associated with it, so that it may be found again */	
-	var DataObjects = {};
+var DataObjects = {};
  
 /*
  * An integer, read by all functions
  */
-  var state;
+var state;
 
 /*
 * Threading system structure; holds all running thread objects
 */
-	var runningThreads = [];
+var runningThreads = [];
 
 /*
 * Amount of time between thread calls in milliseconds
 */ 
 
-	var threadTime = 15;
+var threadTime = 15;
 
   /*
  * id: id of the canvas tag
@@ -59,29 +59,29 @@ var Hydroxide = (function() {
  * w: width of canvas
  * h: height of canvas
  */
-  var start = function (id, ct, fd, cd, w, h) {
-    context = ct;
-    canvas_id = id;
-    canvas_height = h;
-    canvas_width = w;
+	var start = function (id, ct, fd, cd, w, h) {
+	  context = ct;
+	  canvas_id = id;
+	  canvas_height = h;
+	  canvas_width = w;
+	
+	  setInterval(drawFrame, fd);
+	  setInterval(engineCheck, cd);
+	
+	};
+	
+	  /* check if a point with coordinates x and y is in rectangle A */
+	var inRect = function(x, y, A) {
+	  if(A.x <= x && A.y <= y && y <= (A.y + A.height) && x <= (A.x + A.width)) {
+	     return true;
+	  } 
+	
+	  return false;
+	
+	};
 
-    setInterval(drawFrame, fd);
-    setInterval(engineCheck, cd);
-
-  };
-
-  /* check if a point with coordinates x and y is in rectangle A */
-  var inRect = function(x, y, A) {
-    if(A.x <= x && A.y <= y && y <= (A.y + A.height) && x <= (A.x + A.width)) {
-      return true;
-    } 
-
-    return false;
-
-  };
-
-  /* this needs to be connected to a mouse click on the canvas by the user of OH */
-  var mouseClick = function (e) {
+	/* this needs to be connected to a mouse click on the canvas by the user of OH */
+	var mouseClick = function (e) {
     var x;
     var y;
     if (e.pageX || e.pageY) { 
@@ -100,7 +100,7 @@ var Hydroxide = (function() {
     for(var i = 0; i<GameObjects.length; i++) {
       GameObjects[i].screenClicked(x, y, inRect(x, y, GameObjects[i])); 
     }
-  };
+	};
 
   /* check if "value" is in the range from min to max, inclusive */
   var valueInRange = function(value, min, max) {
@@ -112,24 +112,24 @@ var Hydroxide = (function() {
 		var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 		
 		return dist; 
-	}
-
+	};
+	
 	/* returns midpoint coordinates as array of (x1, y1) - (x2, y2) */
 	var midpoint = function(x1, y1, x2, y2) {
 		var res = [Math.abs((x1-x2)/2), Math.abs((y1-y2)/2)]
 			
-		return res
-	}
+		return res;
+	};
 
 	/* returns hyptoteneuse length of a right triangle with bases a and b */
 	var rightTriangleBB = function(a, b) {
 		return Math.sqrt(a*a + b*b);
-	}
+	};
 
 	/* returns base length of a right triangle with base a and hypoteneuse c */
 	var rightTriangleBH = function(a, c) {
 		return Math.sqrt(c*c - a*a);
-	}
+	};
 
 
   /* check if two rectangles overlap, aka collide */
@@ -500,5 +500,13 @@ var OHMovingImageObj = (function() {
 })();
 
 var OHSquareObj = (function() {
-	var obj = Object.create(OHSt
+	var obj = Object.create(OHGameObj);
+	
+	this.width = 0;
+	this.height = 0;
+	
+	obj.setDimension = function(x) {
+		this.width = x;
+		this.height = x; 
+	}
 )();
