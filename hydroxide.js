@@ -1,5 +1,5 @@
 /*
-* HTML5 2D canvas game engine
+* HTML5 2D canvas game engine that stays out of your way
 */
 
 var Hydroxide = (function() {
