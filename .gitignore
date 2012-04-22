@@ -1,1 +1,3 @@
 *.swp
+*.esproj
+.*.espressostorage
