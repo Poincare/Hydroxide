@@ -1,3 +1,5 @@
 *.swp
 *.esproj
 .*.espressostorage
+
+Hydroxide.esproj/*
