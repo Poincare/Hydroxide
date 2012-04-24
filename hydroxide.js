@@ -479,7 +479,7 @@ var OHUpdateSwitchObj = (function() {
 	};
 		
 	return obj;
-}();
+})();
 
 var OHMovingImageObj = (function() {
 	var obj = Object.create(OHGameObj);
@@ -509,4 +509,4 @@ var OHSquareObj = (function() {
 		this.width = x;
 		this.height = x; 
 	}
-)();
+})();
