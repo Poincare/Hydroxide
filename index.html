@@ -9,8 +9,24 @@
 			HTML5 Canvas game engine that stays out of your way
 		</div>
 
-		<div id="features">
-		</div>
+        <div id="example">
+            <code><pre>
+//Bouncing rectangle; the "Hello, world!" of 2D games
+
+br = Object.create(OHWallBouncingObj);
+
+br.draw = function(c) {
+    c.fillRect(this.x, this.y, this.width, this.height);
+};
+
+Hydroxide.registerObject(br); 
+            </pre>
+            </code> 
+        </div>
+
+        <div id="boom">
+            BOOM
+        </div>
 
 		<div id="go">
 			<a href="https://github.com/Poincare/Hydroxide"><button id="go_but">Github</button></a>
