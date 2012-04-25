@@ -436,12 +436,17 @@ var OHWallBouncingObj = (function() {
 	obj.yspeed = 1;
 
 	obj.onEdgeX = function() {
-		obj.xspeed = -obj.xspeed;
+		this.xspeed = -this.xspeed;
 	};
 
 	obj.onEdgeY = function() {
-		obj.yspeed = -obj.yspeed;
+		this.yspeed = -this.yspeed;
 	};
+
+  obj.update = function() {
+    this.x += obj.xspeed;
+    this.y += obj.yspeed;
+  };
 
 	return obj;
 })();
