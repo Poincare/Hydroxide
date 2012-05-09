@@ -9,10 +9,6 @@
     var context = c.getContext("2d");
 
     var br = Object.create(OHWallBouncingObj);
-    br.x = 50;
-    br.y=90;
-    br.width = 50;
-    br.height = 50;
     br.draw = function(c) {
       c.fillRect(this.x, this.y, this.width, this.height);
     };
