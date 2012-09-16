@@ -3,7 +3,10 @@
 
 ##Why is it awesome?
 
+Hydroxide is a **threaded**, simple and out-of-your-way game framework for the HTML5 Canvas.
+
 Its small, easy-to-use and keeps you free to do whatever the heck you want.
+
 The source code is extremely well documented and easy to understand.
 
 Check out examples/ and docs/ to learn more.

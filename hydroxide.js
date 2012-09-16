@@ -12,7 +12,7 @@ var Hydroxide = (function() {
   var canvas_height;
   var canvas_width;
 
-	//canvas ID on DOM
+	//canvas ID on DOM (e.g. "canvas")
   var canvas_id;
 
   /* These are objects that are being used in the game */
@@ -48,7 +48,6 @@ var runningThreads = [];
 /*
 * Amount of time between thread calls in milliseconds
 */ 
-
 var threadTime = 15;
 
   /*
@@ -169,6 +168,7 @@ var threadTime = 15;
   }
 
   /* engine checking; checks bounds, collisions, clicks, etc. */
+  /* basically fires events on objects */
   var engineCheck = function() {
     //check for collision
     for(var i = 0; i<GameObjects.length; i++) {
@@ -184,6 +184,7 @@ var threadTime = 15;
     context.clearRect(0, 0, canvas_width, canvas_height);
   };
 
+  /* draw a frame, immediately, ahead of the loop */
   /* do not use externally unless a forced draw frame (which shouldn't happen) is needed */
   var drawFrame = function() {
     //clear context
