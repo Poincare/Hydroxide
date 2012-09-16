@@ -1,0 +1,11 @@
+bounce_in5lines.html: a simple bouncing rectangle ("Hello, world!" of graphics)
+
+bounce_rect.html: slightly more detailed bouncing rectangle
+
+rect_click.html: introduces click handlers
+
+rect_gen.html: generate rectangle objects, shows inheritance
+
+rect_inme.html: Click handler and collision detection
+
+clickr/: A demonstration of several features all rolled up into one - development in progress
