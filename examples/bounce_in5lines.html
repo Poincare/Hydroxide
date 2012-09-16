@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <script src="../hydroxide.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  
+  <script>
+  function init() {
+    var c = $("#cnv")[0];
+    var context = c.getContext("2d");
+
+    var br = Object.create(OHWallBouncingObj);
+    br.draw = function(c) {
+      c.fillRect(this.x, this.y, this.width, this.height);
+    };
+
+		Hydroxide.registerObject(br);
+    Hydroxide.start("cnv", context, 20, 20, 600, 600);
+  }
+
+  $(document).ready(init);
+  </script>
+
+  <body>
+    <canvas id="cnv" width="600" height="600">Canvas not supported. Go get a new browser.</canvas>
+  </body>
+</html>
