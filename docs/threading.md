@@ -2,11 +2,11 @@
 
 Most Javascript implementations at the moment run in one thread of execution.
 
-HTML5 web workers are one of the first solutions to try to introduce concurrency into Javascript, but, they are not a fully developed solution yet (a.k.a IE hasn't implemented them yet).
+HTML5 web workers are one of the first solutions to try to introduce concurrency into Javascript, but, they are not a fully developed solution yet (a.k.a IE hasn't implemented them yet). Once IE10 is released, we may implement them in Hydroxide.
 
-So, Hydroxide uses a different technique.
+So, until then, Hydroxide uses a different technique.
 
-Rather than actually creating threads, Hydroxide emulates concurrency by using timers, in which a function is called repeatedly every some amount of milliseconds, just like in a scheduler, but, it doesn't run concurrently, and its the application writer's responsibility to make sure that the function being called ends quickly.
+Rather than actually creating threads, Hydroxide emulates concurrency by using timers, in which a function is called repeatedly every some amount of milliseconds, just like in a scheduler, but, it doesn't run concurrently, and its the application writer's responsibility to make sure that the function being called ends quickly. This is something similar to green threads, if you know what those are (i.e. not really parrallel, but, lets you program *as if* it is). 
 
 To set up the threading subsystem:
 
@@ -40,4 +40,3 @@ Hydroxide.killThread(id)
 
 And, that's how threading works.
 
-Keep in mind that its not fully fledged threading; there are no mutexes or semaphores; but, it suffices for many tasks.
