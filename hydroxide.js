@@ -3,8 +3,8 @@
 */
 
 var Hydroxide = (function() {
-    //number of frames completed; use for animations
-    var frameNum = 0;
+	//number of frames completed; use for animations
+	var frameNum = 0;
 
   /* canvas context */
   var context;
@@ -12,7 +12,7 @@ var Hydroxide = (function() {
   var canvas_height;
   var canvas_width;
 
-    //canvas ID on DOM
+	//canvas ID on DOM
   var canvas_id;
 
   /* These are objects that are being used in the game */
@@ -31,8 +31,8 @@ var Hydroxide = (function() {
  
 var GameObjects = [];
 
-    /* These are generic objects onto which the game can tack on some data */
-    /* They can be literally anything, and, each structure has a name associated with it, so that it may be found again */  
+	/* These are generic objects onto which the game can tack on some data */
+	/* They can be literally anything, and, each structure has a name associated with it, so that it may be found again */	
 var DataObjects = {};
  
 /*
@@ -59,29 +59,29 @@ var threadTime = 15;
  * w: width of canvas
  * h: height of canvas
  */
-    var start = function (id, ct, fd, cd, w, h) {
-      context = ct;
-      canvas_id = id;
-      canvas_height = h;
-      canvas_width = w;
-    
-      setInterval(drawFrame, fd);
-      setInterval(engineCheck, cd);
-    
-    };
-    
-      /* check if a point with coordinates x and y is in rectangle A */
-    var inRect = function(x, y, A) {
-      if(A.x <= x && A.y <= y && y <= (A.y + A.height) && x <= (A.x + A.width)) {
-         return true;
-      } 
-    
-      return false;
-    
-    };
+	var start = function (id, ct, fd, cd, w, h) {
+	  context = ct;
+	  canvas_id = id;
+	  canvas_height = h;
+	  canvas_width = w;
+	
+	  setInterval(drawFrame, fd);
+	  setInterval(engineCheck, cd);
+	
+	};
+	
+	  /* check if a point with coordinates x and y is in rectangle A */
+	var inRect = function(x, y, A) {
+	  if(A.x <= x && A.y <= y && y <= (A.y + A.height) && x <= (A.x + A.width)) {
+	     return true;
+	  } 
+	
+	  return false;
+	
+	};
 
-    /* this needs to be connected to a mouse click on the canvas by the user of OH */
-    var mouseClick = function (e) {
+	/* this needs to be connected to a mouse click on the canvas by the user of OH */
+	var mouseClick = function (e) {
     var x;
     var y;
     if (e.pageX || e.pageY) { 
@@ -100,36 +100,36 @@ var threadTime = 15;
     for(var i = 0; i<GameObjects.length; i++) {
       GameObjects[i].screenClicked(x, y, inRect(x, y, GameObjects[i])); 
     }
-    };
+	};
 
   /* check if "value" is in the range from min to max, inclusive */
   var valueInRange = function(value, min, max) {
     return (value >= min) && (value <= max);
   };
 
-    /* returns distance between (x1, y1) and (x2, y2) */
-    var distance = function(x1, y1, x2, y2) {
-        var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-        
-        return dist; 
-    };
-    
-    /* returns midpoint coordinates as array of (x1, y1) - (x2, y2) */
-    var midpoint = function(x1, y1, x2, y2) {
-        var res = [Math.abs((x1-x2)/2), Math.abs((y1-y2)/2)]
-            
-        return res;
-    };
+	/* returns distance between (x1, y1) and (x2, y2) */
+	var distance = function(x1, y1, x2, y2) {
+		var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+		
+		return dist; 
+	};
+	
+	/* returns midpoint coordinates as array of (x1, y1) - (x2, y2) */
+	var midpoint = function(x1, y1, x2, y2) {
+		var res = [Math.abs((x1-x2)/2), Math.abs((y1-y2)/2)]
+			
+		return res;
+	};
 
-    /* returns hyptoteneuse length of a right triangle with bases a and b */
-    var rightTriangleBB = function(a, b) {
-        return Math.sqrt(a*a + b*b);
-    };
+	/* returns hyptoteneuse length of a right triangle with bases a and b */
+	var rightTriangleBB = function(a, b) {
+		return Math.sqrt(a*a + b*b);
+	};
 
-    /* returns base length of a right triangle with base a and hypoteneuse c */
-    var rightTriangleBH = function(a, c) {
-        return Math.sqrt(c*c - a*a);
-    };
+	/* returns base length of a right triangle with base a and hypoteneuse c */
+	var rightTriangleBH = function(a, c) {
+		return Math.sqrt(c*c - a*a);
+	};
 
 
   /* check if two rectangles overlap, aka collide */
@@ -197,7 +197,7 @@ var threadTime = 15;
       context.restore();
     } 
 
-        frameNum++;
+		frameNum++;
   };
 
   /*
@@ -223,86 +223,86 @@ var threadTime = 15;
     return state;
   };
 
-    /*
-    * Get number of frames elapsed
-    */
-    var getFrameNum = function() {
-        return frameNum;
-    };
+	/*
+	* Get number of frames elapsed
+	*/
+	var getFrameNum = function() {
+		return frameNum;
+	};
 
-    /*
-    * "threading" subsystem
-    * thrTime: amount of time between each thread function call, default 15
-    */
-    var initThreading = function(thrTime) {
-        threadTime = thrTime;   
-    };
+	/*
+	* "threading" subsystem
+	* thrTime: amount of time between each thread function call, default 15
+	*/
+	var initThreading = function(thrTime) {
+		threadTime = thrTime;	
+	};
 
-    /*
-    * Add thread, or, basically start interval
-    */
-    var addThread = function(threadObj) {
-        id = setInterval(threadObj.main, threadTime);
+	/*
+	* Add thread, or, basically start interval
+	*/
+	var addThread = function(threadObj) {
+		id = setInterval(threadObj.main, threadTime);
 
-        threadObj.id = id;
-        runningThreads.push(threadObj);
+		threadObj.id = id;
+		runningThreads.push(threadObj);
 
-        return id;
-    };
+		return id;
+	};
 
-    /*
-    * Remove thread from running
-    * calls killed() in thread object
-    */
-    var removeThread = function(id) {
-        for(var i = 0; i<runningThreads.length; i++) {
-            var rt = runningThreads[i];
-            if(rt.id == id) {
-                rt.killed();
+	/*
+	* Remove thread from running
+	* calls killed() in thread object
+	*/
+	var removeThread = function(id) {
+		for(var i = 0; i<runningThreads.length; i++) {
+			var rt = runningThreads[i];
+			if(rt.id == id) {
+				rt.killed();
 
-                //remove running thread
-                clearInterval(id);
-                runningThreads.splice(i, 1);
-            }
-        }
-    };
+				//remove running thread
+				clearInterval(id);
+				runningThreads.splice(i, 1);
+			}
+		}
+	};
 
-    /*
-    * Get array of running threads
-    */
-    var getRunningThreads = function() {
-        return runningThreads;
-    };
+	/*
+	* Get array of running threads
+	*/
+	var getRunningThreads = function() {
+		return runningThreads;
+	};
 
-    /* Code section for DataObjects */
-    
-    /* Do not use DataObject to register game objects, because the name system is meant for programmers, not computers! */
-    var registerDataObject = function(name, obj) {
-        if(name in DataObjects) {
-            return -1;
-        }
+	/* Code section for DataObjects */
+	
+	/* Do not use DataObject to register game objects, because the name system is meant for programmers, not computers! */
+	var registerDataObject = function(name, obj) {
+		if(name in DataObjects) {
+			return -1;
+		}
 
-        DataObjects[name] = obj;
-        return 0;
-    };
-
-
-    var getDataObject = function(name) {
-        if(name in DataObjects) {
-            return DataObjects[name];
-        }
-    
-        else {
-            return -1;
-        }
-
-    };
+		DataObjects[name] = obj;
+		return 0;
+	};
 
 
-    /* essentially the same as registerDataObject */
-    var updateDataObject = function(name, obj) {
-        return registerDataObject(name, obj);
-    }
+	var getDataObject = function(name) {
+		if(name in DataObjects) {
+			return DataObjects[name];
+		}
+	
+		else {
+			return -1;
+		}
+
+	};
+
+
+	/* essentially the same as registerDataObject */
+	var updateDataObject = function(name, obj) {
+		return registerDataObject(name, obj);
+	}
 
   /* exposed functions that external code can use */
   var exposed = {
@@ -314,7 +314,7 @@ var threadTime = 15;
 
     inRect: inRect,
     valueInRange: valueInRange,
-        distance: distance,
+		distance: distance,
 
     setState: setState,
     getState: getState,
@@ -322,17 +322,17 @@ var threadTime = 15;
     mouseClick: mouseClick,
 
     clearContext: clearContext,
-    
-        getFrameNum: getFrameNum,
+	
+		getFrameNum: getFrameNum,
 
-        initThreading: initThreading,
-        addThread: addThread,
-        removeThread: removeThread,
-        getRunningThreads: getRunningThreads,
+		initThreading: initThreading,
+		addThread: addThread,
+		removeThread: removeThread,
+		getRunningThreads: getRunningThreads,
 
-        registerDataObject: registerDataObject,
-        getDataObject: getDataObject,
-        updateDataObject: updateDataObject
+		registerDataObject: registerDataObject,
+		getDataObject: getDataObject,
+		updateDataObject: updateDataObject
   };
 
   return exposed;
@@ -346,22 +346,22 @@ var threadTime = 15;
 * paused() is currently unused
 */
 var OHThread = (function() {
-    //called when thread is started
-    var main = function() {};
+	//called when thread is started
+	var main = function() {};
 
-    //called when thread is killed
-    var killed = function() {};
+	//called when thread is killed
+	var killed = function() {};
 
-    //called when thread is paused
-    var paused = function () {}
+	//called when thread is paused
+	var paused = function () {}
 
-    var exposed = {
-        main: main,
-        killed: killed,
-        paused: paused
-    };
+	var exposed = {
+		main: main,
+		killed: killed,
+		paused: paused
+	};
 
-    return exposed;
+	return exposed;
 
 });
 
@@ -406,107 +406,108 @@ var OHGameObj = (function() {
 /* Specific purpose objects derived from OHGameObj - make your life easier */
 /* You don't have to use these; in fact, it may be beneficial to not use them, but, using them makes development quicker */
 /* for low-level animation; set number of frames, calls a function on draw with a frame number */
-var OHBasicAnimatedObj = (function() {  
-    var obj = Object.create(OHGameObj);
+var OHBasicAnimatedObj = (function() {	
+	var obj = Object.create(OHGameObj);
 
-    obj.frames = 1;
+	obj.frames = 1;
  
-    obj.setFrames = function(f) {
-        this.frames = f;
-    };
+	obj.setFrames = function(f) {
+		this.frames = f;
+	};
 
-    //override!
-    obj.drawFrame = function(frameNum) {};
+	//override!
+	obj.drawFrame = function(frameNum) {};
 
-    obj.draw = function(f) {
-        for(var i = 0; i<this.frames; i++) {
-            obj.drawFrame(i);
-        }
-    };
+	obj.draw = function(f) {
+		for(var i = 0; i<this.frames; i++) {
+			obj.drawFrame(i);
+		}
+	};
 
-    return obj;
+	return obj;
 
 })();
 
 /* an edge bouncing object; used a lot, so, why not abstract it? */
 var OHWallBouncingObj = (function() {
-    var obj = Object.create(OHGameObj);
-    
-    obj.xspeed = 1;
-    obj.yspeed = 1;
+	var obj = Object.create(OHGameObj);
+	
+	obj.xspeed = 1;
+	obj.yspeed = 1;
 
-    obj.onEdgeX = function() {
-        obj.xspeed = -obj.xspeed;
-    };
+	obj.onEdgeX = function() {
+		obj.xspeed = -obj.xspeed;
+	};
 
-    obj.onEdgeY = function() {
-        obj.yspeed = -obj.yspeed;
-    };
+	obj.onEdgeY = function() {
+		obj.yspeed = -obj.yspeed;
+	};
 
-    return obj;
+	return obj;
 })();
 
 
 /* adds a draw swtich; if you don't want to draw the object anymore, just set this.draw to false */
 var OHDrawSwitchObj = (function() {
-    var obj = Object.create(OHGameObj);
-    
-    obj.drawSwitch = true;
+	var obj = Object.create(OHGameObj);
+	
+	obj.drawSwitch = true;
 
-    obj.draw = function() {
-        if(obj.drawSwitch) {
-            return;
-        }
+	obj.draw = function() {
+		if(obj.drawSwitch) {
+			return;
+		}
 
-        obj.drawSwitchOn();
-    };
+		obj.drawSwitchOn();
+	};
 
-    return obj;
+	return obj;
 })();
 
 /* adds a update switch; if you don't want to update the object anymore, just set this.update to false */
 var OHUpdateSwitchObj = (function() {
-    var obj = Object.create(OHGameObj);
-    
-    obj.updateSwitch = true;
-    
-    obj.update = function() {
-        if(obj.updateSwitch) {
-            return;
-        }
+	var obj = Object.create(OHGameObj);
+	
+	obj.updateSwitch = true;
+	
+	obj.update = function() {
+		if(obj.updateSwitch) {
+			return;
+		}
 
-        obj.updateSwitchOn();
-    };
-        
-    return obj;
-}();
+		obj.updateSwitchOn();
+	};
+		
+	return obj;
+})();
 
 var OHMovingImageObj = (function() {
-    var obj = Object.create(OHGameObj);
-    
-    obj.image = "";
-    
-    obj.imageObj = null;
+	var obj = Object.create(OHGameObj);
+	
+	obj.image = "";
+	
+	obj.imageObj = null;
 
-    obj.setImage = function(im) {
-        this.imageObj = new Image();
-    };
+	obj.setImage = function(im) {
+		this.imageObj = new Image();
+	};
 
-    obj.draw = function() {
-        context.drawImage(this.imageObj, this.x, this.y);   
-    };
+	obj.draw = function() {
+		context.drawImage(this.imageObj, this.x, this.y);	
+	};
 
-    return obj;
+	return obj;
 })();
 
 var OHSquareObj = (function() {
-    var obj = Object.create(OHGameObj);
-    
-    this.width = 0;
-    this.height = 0;
-    
-    obj.setDimension = function(x) {
-        this.width = x;
-        this.height = x; 
-    }
-)();
+	var obj = Object.create(OHGameObj);
+	
+	this.width = 0;
+	this.height = 0;
+	
+	obj.setDimension = function(x) {
+		this.width = x;
+		this.height = x; 
+	}
+})();
+
