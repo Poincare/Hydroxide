@@ -3,7 +3,7 @@ function init() {
 
     br = Object.create(OHWallBouncingObj);
     br.draw = function(c) {
-        c.fillRect(this.x, this.y, this.width, this.height);
+        context.fillRect(this.x, this.y, this.width, this.height);
     };
 
     Hydroxide.registerObject(br);
