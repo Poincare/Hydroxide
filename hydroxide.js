@@ -15,6 +15,9 @@ var Hydroxide = (function() {
 	//canvas ID on DOM (e.g. "canvas")
   var canvas_id;
 
+  //whether or not to check for collisions
+  var collisionToggle = true;
+
   /* These are objects that are being used in the game */
   /* Must contain specific public properties:
  * x - x coordinate of object (used for collision detection), bottom left corner
@@ -68,7 +71,15 @@ var threadTime = 15;
 	  setInterval(engineCheck, cd);
 	
 	};
-	
+
+  var collisionDetectionOff()  = function(){
+    collisionToggle = false;
+  }	
+
+  var collisionDetectionOn() = function() {
+    collisionToggle = true;
+  }
+
 	  /* check if a point with coordinates x and y is in rectangle A */
 	var inRect = function(x, y, A) {
 	  if(A.x <= x && A.y <= y && y <= (A.y + A.height) && x <= (A.x + A.width)) {
@@ -175,7 +186,10 @@ var threadTime = 15;
       var selectedObject = GameObjects[i];
 
       checkEdge(selectedObject);
-      checkCollision(selectedObject);
+  
+      if(!collisionToggle) { 
+        checkCollision(selectedObject);
+      }
     }
   };
 
